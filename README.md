@@ -1,15 +1,15 @@
 # Desafio Desenvolvedor Java - Atech
 
 ## Informações do projeto
-	1. Para criar o projeto utilizamos o multi-module do Maven, onde conseguimos 
-  	centrelizar o gerenciamento das dependencias no pom.xml "pai" e termos um
-  	melhor controle.
-  	Abaixo segue um resumo dos 4 serviços que foram criados.
+  1. Para criar o projeto utilizamos o multi-module do Maven, onde conseguimos 
+  centrelizar o gerenciamento das dependencias no pom.xml "pai" e termos um
+  melhor controle.
+  Abaixo segue um resumo dos 4 serviços que foram criados.
 
 ### Ferramentas
-	1. O projeto foi desenvolvido com Java 8 e utilizando o framework Spring Boot v2.2.6.
-	2. Para testes unitários foi utilizado Junit 4.
-        3. Postgres - Docker image postgres:10.5-alpine.
+  1. O projeto foi desenvolvido com Java 8 e utilizando o framework Spring Boot v2.2.6.
+  2. Para testes unitários foi utilizado Junit 4.
+  3. Postgres - Docker image postgres:10.5-alpine.
   
 ### Estrutura do projeto  
   1. atech-config-server - Esse serviço tem a responsabilidade de buscar arquivo de 
@@ -17,19 +17,21 @@
   Esse deve ser o primeiro serviço a ser iniciado.	
   Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-config-server)
        
-  	2. atech-server-register - Esse serviço é responsavel pelo registro e trafego dos nossos serviços, ou seja,
-	nosso API Gateway.
-	Esse deve ser o segundo serviço a ser iniciado, informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-server-register)
+  2. atech-server-register - Esse serviço é responsavel pelo registro e trafego dos nossos serviços, ou seja,
+  nosso API Gateway.
+  Esse deve ser o segundo serviço a ser iniciado.
+  Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-server-register)
 	
-	3. atech-auth-server - Esse serviço tem a responsabilidade de authenticar o acesso de um usuário,
-	fornecendo um token de acesso com o tempo de duração definido pelo administrador do sistema.
-	Esse deve ser o terceiro serviço a ser iniciado, informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-auth-server)
+  3. atech-auth-server - Esse serviço tem a responsabilidade de authenticar o acesso de um usuário,
+  fornecendo um token de acesso com o tempo de duração definido pelo administrador do sistema.
+  Esse deve ser o terceiro serviço a ser iniciado,
+  Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-auth-server)
 	
-	4. flight-control - Esse serviço tem a responsabilidade de cadastrar,atualizar e buscar voos.
-	Após os tres serviços anteriores estiverem no ar esse serviço pode ser iniciado, pois ele precisa 
-	se registrar em nosso API Gateway, caso API Gateway não estiver no ar, ele vai iniciar normal mas 
-	vai ficar inacessivel de fora.
-	Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/flight-control)
+  4. flight-control - Esse serviço tem a responsabilidade de cadastrar,atualizar e buscar voos.
+  Após os tres serviços anteriores estiverem no ar esse serviço pode ser iniciado, pois ele precisa 
+  se registrar em nosso API Gateway, caso API Gateway não estiver no ar, ele vai iniciar normal mas 
+  vai ficar inacessivel de fora.
+  Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/flight-control)
 	
 ## Pré Requisitos 
 	1. JDK Java 8 instalado
