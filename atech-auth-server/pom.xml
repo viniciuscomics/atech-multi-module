@@ -1,20 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>com.atech</groupId>
 		<artifactId>atech-multi-module</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+		
 	<artifactId>atech-auth-server</artifactId>
+	
 	<name>atech-auth-server</name>
-	<description>API responsible for validating and authenticating users</description>
+	<description>API responsible for validating and authenticating users</description>	
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -47,32 +59,55 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>			
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
+			<artifactId>mockito-all</artifactId>			
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
+			<artifactId>springfox-swagger2</artifactId>			
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
+			<artifactId>springfox-swagger-ui</artifactId>			
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-bean-validators</artifactId>
+			<artifactId>springfox-bean-validators</artifactId>			
 		</dependency>
-	</dependencies>
+	</dependencies>	
 
 </project>
