@@ -12,10 +12,10 @@
         3. Postgres - Docker image postgres:10.5-alpine.
   
 ### Estrutura do projeto  
-  	1. atech-config-server - Esse serviço tem a responsabilidade de buscar arquivo de 
-    	configuração de um determinado serviço em um repositório de arquivos. Ex. Github.
-     	Esse deve ser o primeiro serviço a ser iniciado.	
-   Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-config-server)
+  1. atech-config-server - Esse serviço tem a responsabilidade de buscar arquivo de 
+  configuração de um determinado serviço em um repositório de arquivos. Ex. Github.
+  Esse deve ser o primeiro serviço a ser iniciado.	
+  Informações do projeto [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-config-server)
        
   	2. atech-server-register - Esse serviço é responsavel pelo registro e trafego dos nossos serviços, ou seja,
 	nosso API Gateway.
