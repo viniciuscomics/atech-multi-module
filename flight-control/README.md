@@ -12,5 +12,25 @@
      você encontra o arquivo de configuração desse projeto.
      
   5. Foram disponibilizados quatro recursos para esse serviço.
-     Get / Post
+    
+         #Get - Listar todos os voos
+          http://seudomainapigateway/atech/flightcontrol/flight
+         #Get - Buscar por id 
+           http://seudomainapigateway/atech/flightcontrol/flight/{id}
+           
+         #Post - Cadastrar um novo voo
+          http://seudomainapigateway/atech/flightcontrol/flight
+          
+         #PUT - Atualizar um voo
+          http://seudomainapigateway/atech/flightcontrol/flight/{id}
+          
+### SWAGGER
+  1. Essa API tambem fornece um recurso para a documentação em Swagger.
+      
+          http://seudomainapigateway//atech/flightcontrol/swagger-ui.html#/
+          
+          
+
+    
+    
     
