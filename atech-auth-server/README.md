@@ -26,6 +26,23 @@ devera solicitar um token de acesso para consumir os recursos.
   Ou seja, o cliennt solicitará um token para o nosso servidor, sendo validado o servidor irá devolver um token 
   e o client irá chamar o serviço desejado passando esse token, o serviço irá fazer uma chamada para o recurso 
   definido na propriedade "authserver.hostname" para verificar se o token é válido e se já expirou, 
-  caso seja valido é verificado se o usuário tem a ROLE necessaria para consumir o recurso.  
+  caso seja valido é verificado se o usuário tem a ROLE necessaria para consumir o recurso. 
+  
+  ### Exemplos
+    1. Exemplo de um request para solicitar um token
+      curl --location --request POST 'http://localhost:8082/atech/authserver/oauth/token?grant_type=password&username=admin&password=atech' \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --header 'Authorization: Basic YXRlY2g6JDJ5JDEyJGZMSEd4a3FxNk9GRW52VTMwZzBGay5CSHBtZi9vdVpwQk9TYkxwamV2RzVmTjlNNUFhaFJ5'
+    
+    2. Resposta recebida
+       {
+          "access_token": "9d602369-146b-467c-82ea-88a94f1faaed",
+          "token_type": "bearer",
+          "refresh_token": "da1cf237-dc4a-4d2b-ad8d-b0ae313a89f9",
+          "expires_in": 1480,
+          "scope": "read write"
+      }     
+     
+  
  
   
