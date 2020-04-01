@@ -8,11 +8,10 @@
 
 ### Ferramentas
 	1. O projeto foi desenvolvido com Java 8 e utilizando o framework Spring Boot v2.2.6.
-	2. Para testes unitários foi utilizado Junit 4
+	2. Para testes unitários foi utilizado Junit 4.
         3. Postgres - Docker image postgres:10.5-alpine.
   
-### Estrutura do projeto
-  
+### Estrutura do projeto  
   	1. atech-config-server - Esse serviço tem a responsabilidade de buscar arquivo de 
     	configuração de um determinado serviço em um repositório de arquivos. Ex. Github.
      	Esse deve ser o primeiro serviço a ser iniciado.	
