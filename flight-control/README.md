@@ -30,6 +30,7 @@
           http://seudomainapigateway//atech/flightcontrol/swagger-ui.html#/
           
           
+![WhatsApp Image 2020-04-01 at 14 02 42](https://user-images.githubusercontent.com/42116742/78165525-cf5ddf80-7421-11ea-9f1f-5126b8e541f3.jpeg)
 
     
     
