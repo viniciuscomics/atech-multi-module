@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,5 +57,14 @@ public class FlightResource {
 	public Flight create(@Valid @RequestBody Flight flight) {
 		
 		return flightService.save(flight);
+	}
+	
+	@ApiOperation(value = "Update a flight.",response = Flight.class,
+			notes = "This resource updates a flight.",
+			nickname = "updates")
+	@PutMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('"+ROLE_ADMIN+"')")
+	public Flight update(@PathVariable Long id, @Valid @RequestBody Flight flight) {
+		return flightService.update(id, flight);
 	}
 }
