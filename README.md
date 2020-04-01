@@ -45,6 +45,7 @@
 	2. Para compilar você pode rodar o comando  "mvn clean package" dentro do diretorio raiz do projeto
 	"atech-multi-module" que o maven irá executar os testes unitários e de integração e compilar todos os 
 	projetos ou compile individualmente rodando o "mvn clean package" no siretório do submodulo pretendido.
+	3. Para gerar e rodar com docker execute o script run.sh, que o container sera criado e executado.
 	
 ## Executando os testes unitários
 	1. Apos ter baixado o projeto, abra um terminal de comando(ex: git bash)  no diretório do projeto.
