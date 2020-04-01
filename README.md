@@ -5,6 +5,7 @@
 # Ferramentas
 	1. O projeto foi desenvolvido com Java 8 e utilizando o framework Spring Boot v2.2.6.
 	2. Para testes unitários foi utilizado Junit 4
+        3. Postgres - Docker image alpine-postgres.
   
 # Estrutura do projeto
   Para criar o projeto utilizamos o multi-module do Maven, onde conseguimos 
@@ -14,6 +15,7 @@
 
   1. atech-config-server - Esse serviço tem a responsabilidade de buscar arquivo de 
      configuração em um repositorio de arquivos. Ex. Github.
+     Esse de ser o primeiro serviço a ser iniciado, informações [aqui](https://github.com/viniciuscomics/atech-multi-module/tree/master/atech-config-server)
        
   2.    
 	
