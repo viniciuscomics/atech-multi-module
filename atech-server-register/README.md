@@ -1,0 +1,1 @@
+# atech-server-register
