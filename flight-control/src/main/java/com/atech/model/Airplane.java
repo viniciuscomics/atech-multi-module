@@ -19,7 +19,7 @@ import lombok.Data;
 public class Airplane {	
 
 	@Id
-	@SequenceGenerator(name= "seq_airplane_id", sequenceName = "seq_airplane_id", allocationSize = 1)
+	@SequenceGenerator(name= "seq_airplane_id", sequenceName = "seq_airplane_id", allocationSize = 7)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airplane_id")
 	@ApiModelProperty(value = "Code of airplane registred", example = "141")
 	private Long id;

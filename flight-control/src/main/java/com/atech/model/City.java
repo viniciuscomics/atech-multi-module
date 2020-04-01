@@ -19,7 +19,7 @@ import lombok.Data;
 public class City{	
 
 	@Id
-	@SequenceGenerator(name= "seq_city_id", sequenceName = "seq_city_id", allocationSize = 1)
+	@SequenceGenerator(name= "seq_city_id", sequenceName = "seq_city_id", allocationSize = 7)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_city_id")
 	@ApiModelProperty(value = "Code of city registred", example = "4")
 	private Long id;

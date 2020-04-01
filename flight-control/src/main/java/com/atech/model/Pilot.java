@@ -18,7 +18,7 @@ import lombok.Data;
 public class Pilot{
 
 	@Id
-	@SequenceGenerator(name= "seq_pilot_id", sequenceName = "seq_pilot_id", allocationSize = 1)
+	@SequenceGenerator(name= "seq_pilot_id", sequenceName = "seq_pilot_id", allocationSize = 7)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pilot_id")
 	@ApiModelProperty(value = "Code of pilot registred", example = "2")
 	private Long id;

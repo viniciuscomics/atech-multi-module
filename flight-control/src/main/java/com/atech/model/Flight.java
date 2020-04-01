@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -25,7 +26,7 @@ import lombok.Data;
 public class Flight {	
 
 	@Id
-	@SequenceGenerator(name= "seq_flight_id", sequenceName = "seq_flight_id", allocationSize = 1)
+	@SequenceGenerator(name= "seq_flight_id", sequenceName = "seq_flight_id", allocationSize = 7)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_flight_id")
 	@ApiModelProperty(value = "code of flight registred", example = "123")
 	private Long id;
@@ -39,25 +40,26 @@ public class Flight {
 	private LocalDateTime arrive;
 	
 	@NotNull
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_airplane")
 	@ApiModelProperty(value = "Code of airplane registred", example = "1")
 	private Airplane airplane;
 	
 	@NotNull
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_pilot")
 	@ApiModelProperty(value = "Code of pilot registred", example = "2")
 	private Pilot pilot;
 	
+	
 	@NotNull
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_city_source")
 	@ApiModelProperty(value = "Code of city source", example = "2")
 	private City citySource;
 	
 	@NotNull
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_city_destiny")
 	@ApiModelProperty(value = "Code of city destination", example = "3")
 	private City cityDestiny;
