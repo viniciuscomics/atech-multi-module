@@ -26,7 +26,8 @@
           
 ### Observaçoes
   1. Ainda não temos api para cadastro de cidade,piloto e avião. Por isso estou usando o cascade all nos models, 
-     não é recomendado, mas para uma segunda versão podemos liberar recursos para esses cadastro efazer essa melhoria.
+     não é recomendado, mas para uma segunda versão podemos liberar recursos para esses cadastros e fazer essa melhoria.
+     Onde podemos criar outro serviço para esse cadastro e usar o Graphql.
           
 ### SWAGGER
   1. Essa API tambem fornece um recurso para a documentação em Swagger.
