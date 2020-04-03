@@ -41,7 +41,42 @@ services:
             config-server:
               condition: service_healthy
         logging:
-            driver: json-file    
+            driver: json-file  
+    dbauth:        
+        container_name: authserverdb
+        environment:
+                  POSTGRES_USER: atech
+                  POSTGRES_PASSWORD: atech
+                  POSTGRES_DB: authserverdb
+        image: postgres:10.5-alpine
+        volumes:
+            - db-auhtserver:/var/lib/postgresql/data/
+        expose:
+            - 5442        
+        ports:        
+            - 5442:5432
+        networks:
+            - emp-network
+        logging:
+            driver: json-file
+
+    dbflght:        
+        container_name: flightcontroldb
+        environment:
+                  POSTGRES_USER: atech
+                  POSTGRES_PASSWORD: atech
+                  POSTGRES_DB: flightcontroldb
+        image: postgres:10.5-alpine
+        volumes:
+            - db-flightcontrol:/var/lib/postgresql/data/
+        expose:
+            - 5432       
+        ports:
+            - 5432:5432
+        networks:
+            - emp-network
+        logging:
+            driver: json-file   
            
     auth-server:
         container_name: auth-server
@@ -103,3 +138,6 @@ services:
 networks:
     emp-network:
         driver: bridge
+volumes:
+  db-auhtserver:
+  db-flightcontrol:        
