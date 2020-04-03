@@ -144,9 +144,10 @@ public class FlightService {
 				flight.getDeparture(), flight.getArrive(),
 				flight.getPilot().getId(), flight.getStatus());
 		
-				opt.ifPresent(e -> {
-					log.error("","Error: pilot is in other flight",flight);
-					throw new PilotInvalidException();
-				});
+		if( opt != null && opt.isPresent()) {
+			log.error("","Error: pilot is in other flight",flight);
+			throw new PilotInvalidException();
+		}
+				
 	}
 }
