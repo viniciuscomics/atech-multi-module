@@ -5,13 +5,14 @@ services:
         build:
             context: .
             dockerfile: atech-config-server/Dockerfile-atechconfigserver
-        image: openjdk:8u171-jdk-alpine3.8
+        image: config-server-latest
         expose:
             - 8081
         ports:
             - 8081:8081
         networks:
-            - emp-network        
+            - emp-network
+        
     server-register:
         container_name: server-register
         environment:
@@ -19,7 +20,7 @@ services:
         build:
             context: .
             dockerfile: atech-server-register/Dockerfile-atechserverregister
-        image: openjdk:8u171-jdk-alpine3.8
+        image: server-register-latest
         expose:
             - 8082
         ports:
@@ -45,6 +46,7 @@ services:
             - emp-network
         logging:
             driver: json-file
+
     flight-controldb:        
         container_name: flight-controldb
         environment:
@@ -59,7 +61,8 @@ services:
         networks:
             - emp-network
         logging:
-            driver: json-file              
+            driver: json-file   
+           
     auth-server:
         container_name: auth-server
         environment:
@@ -67,8 +70,8 @@ services:
                   SPRING_DATASOURCE_URL: jdbc:postgresql://auth-serverdb:5442/authserverdb
         build:
             context: .
-            dockerfile: atech-server-register/Dockerfile-atechserverregister
-        image: openjdk:8u171-jdk-alpine3.8
+            dockerfile: atech-auth-server/Dockerfile-atechauthserver
+        image: auth-server-latest
         expose:
             - 8083
         ports:
@@ -81,6 +84,7 @@ services:
             - auth-serverdb
         logging:
             driver: json-file
+
     flight-control:
         container_name: flight-control
         environment:
@@ -89,7 +93,7 @@ services:
         build:
             context: .
             dockerfile: flight-control/Dockerfile-flightcontrol
-        image: openjdk:8u171-jdk-alpine3.8
+        image: flight-control-latest
         expose:
             - 8080
         ports:
@@ -102,7 +106,7 @@ services:
             - flight-controldb
             - auth-server
         logging:
-            driver: json-file   
+            driver: json-file    
 networks:
     emp-network:
         driver: bridge
