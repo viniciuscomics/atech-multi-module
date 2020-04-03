@@ -6,6 +6,11 @@ services:
             context: .
             dockerfile: atech-config-server/Dockerfile-atechconfigserver
         image: config-server-latest
+        healthcheck: 
+            test: curl -f http://localhost:8081/actuator/health
+            interval: 20s
+            timeout: 5s
+            retries: 5            
         expose:
             - 8081
         ports:
@@ -21,6 +26,11 @@ services:
             context: .
             dockerfile: atech-server-register/Dockerfile-atechserverregister
         image: server-register-latest
+        healthcheck: 
+            test: curl -f http://localhost:8082/actuator/health
+            interval: 20s
+            timeout: 5s
+            retries: 5   
         expose:
             - 8082
         ports:
@@ -28,50 +38,27 @@ services:
         networks:
             - emp-network        
         depends_on:
-            - config-server
+            config-server:
+              condition: service_healthy
         logging:
-            driver: json-file
-    auth-serverdb:        
-        container_name: auth-serverdb
-        environment:
-                  POSTGRES_USER: atech
-                  POSTGRES_PASSWORD: atech
-                  POSTGRES_DB: authserverdb
-        image: postgres:10.5-alpine
-        expose:
-            - 5442
-        ports:
-            - 5442:5432
-        networks:
-            - emp-network
-        logging:
-            driver: json-file
-
-    flight-controldb:        
-        container_name: flight-controldb
-        environment:
-                  POSTGRES_USER: atech
-                  POSTGRES_PASSWORD: atech
-                  POSTGRES_DB: flightcontroldb
-        image: postgres:10.5-alpine
-        expose:
-            - 5432
-        ports:
-            - 5432:5432
-        networks:
-            - emp-network
-        logging:
-            driver: json-file   
+            driver: json-file    
            
     auth-server:
         container_name: auth-server
         environment:
                   SPRING_APPLICATION_JSON: '{"spring":{"application":{"name": "atech-auth-server"},"cloud":{"config":{"uri":"http://config-server:8081"}}}}'
                   SPRING_DATASOURCE_URL: jdbc:postgresql://auth-serverdb:5442/authserverdb
+                  SPRING_DATASOURCE_USERNAME: atech
+                  SPRING_DATASOURCE_PASSWORD: atech
         build:
             context: .
             dockerfile: atech-auth-server/Dockerfile-atechauthserver
         image: auth-server-latest
+        healthcheck: 
+            test: curl -f http://localhost:8083/actuator/health
+            interval: 20s
+            timeout: 5s
+            retries: 5   
         expose:
             - 8083
         ports:
@@ -79,9 +66,10 @@ services:
         networks:
             - emp-network        
         depends_on:
-            - config-server
-            - server-register
-            - auth-serverdb
+            config-server:
+              condition: service_healthy
+            server-register:
+              condition: service_healthy            
         logging:
             driver: json-file
 
@@ -90,23 +78,28 @@ services:
         environment:
                   SPRING_APPLICATION_JSON: '{"spring":{"application":{"name": "atech-flight-control"},"cloud":{"config":{"uri":"http://config-server:8081"}}}}'
                   SPRING_DATASOURCE_URL: jdbc:postgresql://flight-controldb:5432/flightcontroldb
+                  SPRING_DATASOURCE_USERNAME: atech
+                  SPRING_DATASOURCE_PASSWORD: atech
         build:
             context: .
             dockerfile: flight-control/Dockerfile-flightcontrol
         image: flight-control-latest
+        healthcheck: 
+            test: curl -f http://localhost:8080/actuator/health
+            interval: 20s
+            timeout: 5s
+            retries: 5   
         expose:
             - 8080
         ports:
             - 8080:8080
         networks:
             - emp-network        
-        depends_on:
-            - config-server
-            - server-register
-            - flight-controldb
-            - auth-server
+        depends_on:            
+            auth-server: 
+              condition: service_healthy  
         logging:
-            driver: json-file    
+            driver: json-file              
 networks:
     emp-network:
         driver: bridge

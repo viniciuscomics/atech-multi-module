@@ -86,7 +86,7 @@ public class SwaggerConfig extends WebSecurityConfigurerAdapter{
 	                               "/swagger-resources/**",
 	                               "/configuration/security",
 	                               "/swagger-ui.html",
-	                               "/webjars/**");
+	                               "/webjars/**","/actuator/health");
 	}
 
 	

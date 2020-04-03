@@ -3,7 +3,7 @@ LABEL maintainer="vinicius_csa@yahoo.com.br"
 
 ENV LANG C.UTF8
 
-RUN apk add --update bash
+RUN apk add curl && apk add --update bash
 
 ADD flight-control/target/*.jar /app/app.jar
 
