@@ -42,14 +42,14 @@
 ## Compilando o projeto
 
 	1. Apos ter baixado o projeto, abra um terminal de comando(ex: git bash)  no diretório do projeto.
-	2. Para compilar você pode rodar o comando  "mvn clean package" dentro do diretorio raiz do projeto
-	"atech-multi-module" que o maven irá executar os testes unitários e de integração e compilar todos os 
-	projetos ou compile individualmente rodando o "mvn clean package" no siretório do submodulo pretendido.
-	3. Para gerar e rodar com docker execute o script run.sh, que o container sera criado e executado.
+	2. Para compilar execute o script run.sh dentro do diretorio raiz do projeto
+	"atech-multi-module" que será executado os testes unitários e de integração e compilar todos os 
+	projetos e executar o docker-compose.	
 	
 ## Executando os testes unitários
 	1. Apos ter baixado o projeto, abra um terminal de comando(ex: git bash)  no diretório do projeto.
-	2. Digite o comando "mvn test" e aguarde o fim dos testes.
+	2. Execute docker run -p 5665:5432 --name authserverdbteste -e POSTGRES_USER=atech -e POSTGRES_PASSWORD=atech -e POSTGRES_DB=authserverdbteste -d postgres:10.5-alpine
+	3. Digite o comando "mvn test" e aguarde o fim dos testes.
 		 
 ## Executando a API no ambiente local
 	
