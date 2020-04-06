@@ -9,11 +9,11 @@
 		<artifactId>atech-multi-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
-		
+
 	<artifactId>atech-auth-server</artifactId>
-	
+
 	<name>atech-auth-server</name>
-	<description>API responsible for validating and authenticating users</description>	
+	<description>API responsible for validating and authenticating users</description>
 
 	<dependencies>
 		<dependency>
@@ -35,6 +35,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.interceptor</groupId>
+			<artifactId>javax.interceptor-api</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -86,44 +91,44 @@
 
 		<dependency>
 			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>			
+			<artifactId>hamcrest-all</artifactId>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>			
+			<artifactId>mockito-all</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>			
+			<artifactId>springfox-swagger2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>			
+			<artifactId>springfox-swagger-ui</artifactId>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-bean-validators</artifactId>			
+			<artifactId>springfox-bean-validators</artifactId>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 	<build>
-		<plugins>			
+		<plugins>
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>                
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>3.0.0-M3</version>
-                    </dependency>
-                </dependencies>
-            </plugin>		
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>3.0.0-M3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 </project>

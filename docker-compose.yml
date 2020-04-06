@@ -1,4 +1,4 @@
-version: '2.2'
+version: '2.3'
 services:
     config-server:
         container_name: config-server
@@ -17,15 +17,15 @@ services:
             - 8081:8081
         networks:
             - emp-network
-        
-    server-register:
+    
+    discovery:
         container_name: server-register
         environment:
                   SPRING_APPLICATION_JSON: '{"spring":{"application":{"name": "atech-server-register"},"cloud":{"config":{"uri":"http://config-server:8081"}}}}'
         build:
             context: .
             dockerfile: atech-server-register/Dockerfile-atechserverregister
-        image: server-register-latest
+        image: server-register-latest        
         healthcheck: 
             test: curl -f http://localhost:8082/actuator/health
             interval: 20s
@@ -39,9 +39,39 @@ services:
             - emp-network        
         depends_on:
             config-server:
-              condition: service_healthy
+               condition: service_healthy  
+        
         logging:
             driver: json-file  
+
+    gateway:
+        container_name: server-gateway
+        environment:
+                  SPRING_APPLICATION_JSON: '{"spring":{"application":{"name": "atech-api-gateway"},"cloud":{"config":{"uri":"http://config-server:8081"}}}}'
+        build:
+            context: .
+            dockerfile: atech-api-gateway/Dockerfile-atechapigateway
+        image: server-gateway-latest        
+        healthcheck: 
+            test: curl -f http://localhost:8079/actuator/health
+            interval: 20s
+            timeout: 5s
+            retries: 5   
+        expose:
+            - 8079
+        ports:
+            - 8079:8079
+        networks:
+            - emp-network        
+        depends_on:
+            config-server:
+               condition: service_healthy 
+            discovery:
+               condition: service_healthy                         
+        
+        logging:
+            driver: json-file
+
     dbauth:        
         container_name: authserverdb
         environment:
@@ -49,8 +79,7 @@ services:
                   POSTGRES_PASSWORD: atech
                   POSTGRES_DB: authserverdb
         image: postgres:10.5-alpine
-        volumes:
-            - db-auhtserver:/var/lib/postgresql/data/
+        
         expose:
             - 5442        
         ports:        
@@ -58,17 +87,15 @@ services:
         networks:
             - emp-network
         logging:
-            driver: json-file
+            driver: json-file  
 
-    dbflght:        
+    dbflight:        
         container_name: flightcontroldb
         environment:
                   POSTGRES_USER: atech
                   POSTGRES_PASSWORD: atech
                   POSTGRES_DB: flightcontroldb
-        image: postgres:10.5-alpine
-        volumes:
-            - db-flightcontrol:/var/lib/postgresql/data/
+        image: postgres:10.5-alpine 
         expose:
             - 5432       
         ports:
@@ -76,13 +103,13 @@ services:
         networks:
             - emp-network
         logging:
-            driver: json-file   
+            driver: json-file             
            
     auth-server:
         container_name: auth-server
         environment:
                   SPRING_APPLICATION_JSON: '{"spring":{"application":{"name": "atech-auth-server"},"cloud":{"config":{"uri":"http://config-server:8081"}}}}'
-                  SPRING_DATASOURCE_URL: jdbc:postgresql://auth-serverdb:5442/authserverdb
+                  SPRING_DATASOURCE_URL: jdbc:postgresql://dbauth:5432/authserverdb?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
                   SPRING_DATASOURCE_USERNAME: atech
                   SPRING_DATASOURCE_PASSWORD: atech
         build:
@@ -102,42 +129,40 @@ services:
             - emp-network        
         depends_on:
             config-server:
-              condition: service_healthy
-            server-register:
-              condition: service_healthy            
+                condition: service_healthy
+            discovery:
+                condition: service_healthy 
+            gateway:
+                condition: service_healthy                                
+                       
         logging:
-            driver: json-file
+            driver: json-file    
 
     flight-control:
         container_name: flight-control
         environment:
                   SPRING_APPLICATION_JSON: '{"spring":{"application":{"name": "atech-flight-control"},"cloud":{"config":{"uri":"http://config-server:8081"}}}}'
-                  SPRING_DATASOURCE_URL: jdbc:postgresql://flight-controldb:5432/flightcontroldb
-                  SPRING_DATASOURCE_USERNAME: atech
-                  SPRING_DATASOURCE_PASSWORD: atech
+                  SPRING_DATASOURCE_URL: jdbc:postgresql://dbflight:5432/flightcontroldb?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
         build:
             context: .
             dockerfile: flight-control/Dockerfile-flightcontrol
         image: flight-control-latest
-        healthcheck: 
-            test: curl -f http://localhost:8080/actuator/health
-            interval: 20s
-            timeout: 5s
-            retries: 5   
         expose:
             - 8080
         ports:
             - 8080:8080
         networks:
             - emp-network        
-        depends_on:            
-            auth-server: 
-              condition: service_healthy  
+        depends_on:
+            config-server:
+                condition: service_healthy
+            discovery:
+                condition: service_healthy 
+            gateway:
+                condition: service_healthy   
         logging:
-            driver: json-file              
+            driver: json-file                          
+     
 networks:
     emp-network:
         driver: bridge
-volumes:
-  db-auhtserver:
-  db-flightcontrol:        

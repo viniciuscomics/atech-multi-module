@@ -33,6 +33,7 @@
 		<module>atech-server-register</module>
 		<module>atech-auth-server</module>
 		<module>flight-control</module>
+		<module>atech-api-gateway</module>
 	</modules>
 
 	<dependencies>
